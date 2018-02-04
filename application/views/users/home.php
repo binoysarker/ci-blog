@@ -1,33 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Home | Article List</title>
-	<?= link_tag('Assets/css/bootstrap.min.css') ?>
-	<?= link_tag('Assets/css/tether.min.css') ?>
-</head>
-<body>
-	<!-- top navbar sectioin -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-	  <a class="navbar-brand" href="#">Article List</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-
-	  <div class="collapse navbar-collapse" id="navbarColor01">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="#">Login <span class="sr-only">(current)</span></a>
-	      </li>
-	    </ul>
-	    <form class="form-inline my-2 my-lg-0">
-	      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-	      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-	    </form>
-	  </div>
-	</nav>
-	<script type="text/javascript" src="<?= base_url('Assets/js/tether.min.js') ?>"></script>
-	<script type="text/javascript" src="<?= base_url('/Assets/js/jquery-3.2.1.min.js') ?>"></script>
-	<script type="text/javascript" src="<?= base_url('/Assets/js/bootstrap.min.js') ?>"></script>
-</body>
-</html>
+<?php include('header.php') ?>
+<!-- form section -->
+<div class="container">
+	<?= form_open('AdminController/send') ?>
+	  <fieldset>
+	    <legend>Amin Login</legend>
+	    <div class="form-group">
+	      <label for="username">User Name</label>
+	      <?= form_input(['class'=>'form-control','type'=>'text','id'=>'username','aria-describedby'=>'username','placeholder'=>'Full Name','name'=>'username']) ?>
+	      <small id="username" class="form-text text-muted">Please enter you name</small>
+	    </div><div class="form-group">
+	      <label for="exampleInputEmail1">Email address</label>
+	      <?= form_input(['class'=>'form-control','type'=>'email','id'=>'exampleInputEmail1','aria-describedby'=>'emailHelp','placeholder'=>'Enter email','name'=>'email']) ?>
+	      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+	    </div>
+	    <div class="form-group">
+	      <label for="exampleInputPassword1">Password</label>
+	      <?= form_password(['type'=>'password','class'=>'form-control','id'=>'exampleInputPassword1','aria-describedby'=>'passwordHelp','placeholder'=>'Password','name'=>'pass']) ?>
+	      <small id="passwordHelp" class="form-text text-muted">please enter a strong password</small>
+	    </div>
+	    </fieldset>
+	    <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+	    <?= form_submit(['type'=>'submit','class'=>'btn btn-primary','value'=>'Submit']) ?>
+	    <?= form_reset(['type'=>'reset','class'=>'btn btn-info','value'=>'Reset']) ?>
+</div>
+<?php include('footer.php') ?>
