@@ -21,14 +21,26 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
+        <?php if ($message = $this->session->userdata('message')): ?>
+          <!-- display error message -->
+          <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong><?= $message; $this->session->unset_userdata('message') ?>
+          </div>
+        <?php endif ?>
+        <?php if ($message = $this->session->userdata('success_message')): ?>
+          <div class="alert alert-success" role="alert">
+            <strong>Well done!</strong> <?= $message; $this->session->unset_userdata('success_message') ?>
+          </div>
+        <?php endif ?>
+
         <?= form_open('/login-check'); ?>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="email_address">Email address</label>
+            <input class="form-control" id="email_address" name="email_address" type="email" aria-describedby="emailHelp" placeholder="Enter email">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+            <input class="form-control" id="exampleInputPassword1" name="password" type="password" placeholder="Password">
           </div>
           <div class="form-group">
             <div class="form-check">

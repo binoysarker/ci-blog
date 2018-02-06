@@ -50,12 +50,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 // default section
-$route['default_controller'] = 'home';
-$route['about'] = 'home/about';
-$route['contact'] = 'home/contact';
-$route['posts'] = 'home/posts';
+$route['default_controller'] = 'Home_Controller';
+$route['about'] = 'Home_Controller/about';
+$route['contact'] = 'Home_Controller/contact';
+$route['posts'] = 'Home_Controller/posts';
+
+// super admin sectioin
+$route['dashboard'] = 'Super_Admin_Controller/index';
+$route['logout'] = 'Super_Admin_Controller/logout';
+$route['add-category'] = 'Super_Admin_Controller/add_category';
+$route['add-posts'] = 'Super_Admin_Controller/add_posts';
+
+$route['save-category'] = 'Super_Admin_Controller/save_category';
+$route['save-post'] = 'Super_Admin_Controller/save_post';
+
 // admin section
-$route['admin'] = 'admin/index';
-$route['login-check'] = 'admin/admin_login_check';
+$route['admin'] = 'Admin_Controller/index';
+$route['login-check'] = 'Admin_Controller/admin_login_check';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
