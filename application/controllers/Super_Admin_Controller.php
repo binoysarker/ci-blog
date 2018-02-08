@@ -23,7 +23,7 @@ class Super_Admin_Controller extends CI_Controller
 	}
 	public function logout()
 	{
-		// unsetting use data sesstion
+		// unsetting user data sesstion
 		$this->session->unset_userdata('admin_id');
 		$this->session->unset_userdata('admin_name');
 		$sdata['success_message'] = 'You are successfully logged out';
@@ -37,9 +37,22 @@ class Super_Admin_Controller extends CI_Controller
 		$data['admin_content'] = $this->load->view('admin/pages/admin_add_category','',true);
 		$this->load->view('admin/admin_master',$data);
 	}
-	public function add_posts()
+	public function manage_category()
+	{
+		// getting all the category and passing in the page
+		$result['all_category'] = $this->Super_Admin_Model->get_all_category();
+		$data['admin_content'] = $this->load->view('admin/pages/admin_manage_category',$result,true);
+		$this->load->view('admin/admin_master',$data);
+	}
+	public function add_post()
 	{
 		$data['admin_content'] = $this->load->view('admin/pages/admin_add_post','',true);
+		$this->load->view('admin/admin_master',$data);
+	}
+	public function edit_category($category_id)
+	{
+		$result['category'] = $this->Super_Admin_Model->get_specific_category($category_id);
+		$data['admin_content'] = $this->load->view('admin/pages/admin_edit_category',$result,true);
 		$this->load->view('admin/admin_master',$data);
 	}
 	
@@ -48,10 +61,58 @@ class Super_Admin_Controller extends CI_Controller
 	{
 		$result = $this->Super_Admin_Model->save_category_info();
 		if ($result) {
-			echo "successfully";
+			$sdata['success_message'] = 'Category is addedd successfully';
+			$this->session->set_userdata($sdata);
+			redirect('add-category','refresh');
 		}
 		else{
-			echo "not successfully";
+			$sdata['error_message'] = 'Category is not addedd';
+			$this->session->set_userdata($sdata);
+			redirect('add-category','refresh');
 		}
 	}
+	public function save_post()
+	{
+		$result = $this->Super_Admin_Model->save_post_info();
+		if ($result) {
+			$sdata['success_message'] = 'Post is addedd successfully';
+			$this->session->set_userdata($sdata);
+			redirect('add-post','refresh');
+		}
+		else{
+			$sdata['error_message'] = 'Post is not addedd';
+			$this->session->set_userdata($sdata);
+			redirect('add-post','refresh');
+		}
+	}
+
+	// update data
+	public function publish_status($category_id)
+	{
+		$result = $this->Super_Admin_Model->publish_status_info($category_id);
+		redirect('/manage-category','refresh');
+	}
+	public function unpublish_status($category_id)
+	{
+		$result = $this->Super_Admin_Model->unpublish_status_info($category_id);
+		redirect('/manage-category','refresh');
+	}
+	public function update_category()
+	{
+		$result = $this->Super_Admin_Model->update_category_info();
+		$sdata['success_message'] = 'Category is update';
+		$this->session->set_userdata($sdata);
+		redirect('/manage-category','refresh');
+	}
+
+
+	// delete category
+	public function delete_category($category_id)
+	{
+		$this->db->where('category_id',$category_id)
+			->delete('tbl_category');
+		redirect('/manage-category','refresh');
+	}
+
+
 }

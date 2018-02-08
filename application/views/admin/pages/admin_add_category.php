@@ -4,7 +4,20 @@
     <div class="card-body">
       
 
-      <?= form_open('/save-category'); ?>
+      <?= form_open('save-category'); ?>
+        <!-- display error message -->
+        <?php if ($message = $this->session->userdata('error_message')): ?>
+          <div class="form-group">
+              <div class="alert alert-danger" role="alert">
+                <strong>Oh snap!</strong><?= $message; $this->session->unset_userdata('error_message') ?>
+              </div>
+            <?php endif ?>
+            <?php if ($message = $this->session->userdata('success_message')): ?>
+              <div class="alert alert-success" role="alert">
+                <strong>Well done!</strong> <?= $message; $this->session->unset_userdata('success_message') ?>
+              </div>
+          </div>
+        <?php endif ?>
         <div class="form-group">
           <label for="category_name">Category Name</label>
           <input class="form-control" id="category_name" name="category_name" type="text" aria-describedby="emailHelp" placeholder="Category Name">

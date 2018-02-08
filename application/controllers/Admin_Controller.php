@@ -5,6 +5,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 class Admin_Controller extends CI_Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+		$admin_id = $this->session->userdata('admin_id');
+		if ($admin_id != Null) {
+			redirect('/dashboard','refresh');
+		}
+	}
 	public function index()
 		{
 			$this->load->view('admin/admin_login');
@@ -16,8 +24,7 @@ class Admin_Controller extends CI_Controller
 			// loading model
 			$this->load->model('Admin_Model');
 			$result = $this->Admin_Model->check_admin_login_info($email_address,$password);
-			$sdata = [];
-			if ($result) {
+				if ($result) {
 				// $this->load->view('admin/admin_dashboard');
 				foreach ($result as $key => $value) {
 					$sdata['admin_id'] = $value['admin_id'];

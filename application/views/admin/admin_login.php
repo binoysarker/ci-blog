@@ -21,8 +21,8 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
+        <!-- display error message -->
         <?php if ($message = $this->session->userdata('message')): ?>
-          <!-- display error message -->
           <div class="alert alert-danger" role="alert">
             <strong>Oh snap!</strong><?= $message; $this->session->unset_userdata('message') ?>
           </div>

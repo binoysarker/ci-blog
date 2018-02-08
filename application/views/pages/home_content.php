@@ -12,9 +12,28 @@
     </div>
   </div>
 </header>
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
+    <div class="col-lg-3 ">
+        <!-- now display all the available categoris here -->
+        <aside>
+        <ul class="list-group">
+          <?php if ($result): ?>
+            <?php foreach ($result as $key => $value): ?>
+              <a href="#" class="list-group-item justify-content-between">
+                <?= $value->category_name ?>
+                <?php if ($post = $this->Super_Admin_Model->post_by_category($value->category_id)): ?>
+                    <span class="badge badge-default badge-pill float-right">posts: <?= count($post) ?></span>
+                <?php endif ?>
+              </a>
+            <?php endforeach ?>
+          <?php endif ?>
+        </ul>
+        </aside>
+    </div>
+    <div class="col-lg-6 col-md-10 ">
+      <!-- now lets start to load the posts in the home page -->
+
       <div class="post-preview">
         <a href="post.html">
           <h2 class="post-title">
@@ -73,5 +92,6 @@
         <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
       </div>
     </div>
+
   </div>
 </div>

@@ -10,10 +10,10 @@
   <title>Admin | Home</title>
   <!-- Bootstrap core CSS-->
   <?= link_tag('admin_asset/vendor/bootstrap/css/bootstrap.min.css') ?>
-  <!-- Custom fonts for this template-->
-  <?= link_tag('admin_asset/vendor/font-awesome/css/font-awesome.min.css') ?>
   <!-- Page level plugin CSS-->
   <?= link_tag('admin_asset/vendor/datatables/dataTables.bootstrap4.css') ?>
+  <!-- Custom fonts for this template-->
+  <?= link_tag('admin_asset/vendor/font-awesome/css/font-awesome.min.css') ?>
   <!-- Custom styles for this template-->
   <?= link_tag('admin_asset/css/sb-admin.css') ?>
 </head>
@@ -39,8 +39,14 @@
             <span class="nav-link-text">Add Category</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="<?= base_url('/manage-category') ?>">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">Manage Category</span>
+          </a>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="<?= base_url('/add-posts') ?>">
+          <a class="nav-link" href="<?= base_url('/add-post') ?>">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Add Posts</span>
           </a>
