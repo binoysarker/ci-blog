@@ -8,7 +8,8 @@ class Home_Controller extends CI_Controller
 	
 	public function index()
 	{
-		$result['result'] = $this->Super_Admin_Model->select_all_published_category();
+		$result['published_post'] = $this->Super_Admin_Model->select_all_published_post();
+		$result['published_category'] = $this->Super_Admin_Model->select_all_published_category();
 		$data['main_content'] = $this->load->view('pages/home_content',$result,true);
 		$this->load->view('layouts/master',$data);
 	}

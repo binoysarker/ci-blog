@@ -44,6 +44,13 @@ class Super_Admin_Controller extends CI_Controller
 		$data['admin_content'] = $this->load->view('admin/pages/admin_manage_category',$result,true);
 		$this->load->view('admin/admin_master',$data);
 	}
+	public function manage_post()
+	{
+		// getting all the category and passing in the page
+		$result['all_post'] = $this->Super_Admin_Model->get_all_post();
+		$data['admin_content'] = $this->load->view('admin/pages/admin_manage_post',$result,true);
+		$this->load->view('admin/admin_master',$data);
+	}
 	public function add_post()
 	{
 		$data['admin_content'] = $this->load->view('admin/pages/admin_add_post','',true);
@@ -53,6 +60,12 @@ class Super_Admin_Controller extends CI_Controller
 	{
 		$result['category'] = $this->Super_Admin_Model->get_specific_category($category_id);
 		$data['admin_content'] = $this->load->view('admin/pages/admin_edit_category',$result,true);
+		$this->load->view('admin/admin_master',$data);
+	}
+	public function edit_post($post_id)
+	{
+		$result['post'] = $this->Super_Admin_Model->get_specific_post($post_id);
+		$data['admin_content'] = $this->load->view('admin/pages/admin_edit_post',$result,true);
 		$this->load->view('admin/admin_master',$data);
 	}
 	
@@ -92,10 +105,20 @@ class Super_Admin_Controller extends CI_Controller
 		$result = $this->Super_Admin_Model->publish_status_info($category_id);
 		redirect('/manage-category','refresh');
 	}
+	public function publish_post_status($post_id)
+	{
+		$result = $this->Super_Admin_Model->publish_post_status_info($post_id);
+		redirect('/manage-post','refresh');
+	}
 	public function unpublish_status($category_id)
 	{
 		$result = $this->Super_Admin_Model->unpublish_status_info($category_id);
 		redirect('/manage-category','refresh');
+	}
+	public function unpublish_post_status($post_id)
+	{
+		$result = $this->Super_Admin_Model->unpublish_post_status_info($post_id);
+		redirect('/manage-post','refresh');
 	}
 	public function update_category()
 	{
@@ -103,6 +126,13 @@ class Super_Admin_Controller extends CI_Controller
 		$sdata['success_message'] = 'Category is update';
 		$this->session->set_userdata($sdata);
 		redirect('/manage-category','refresh');
+	}
+	public function update_post()
+	{
+		$result = $this->Super_Admin_Model->update_post_info();
+		$sdata['success_message'] = 'Post is updated';
+		$this->session->set_userdata($sdata);
+		redirect('/manage-post','refresh');
 	}
 
 
@@ -112,6 +142,12 @@ class Super_Admin_Controller extends CI_Controller
 		$this->db->where('category_id',$category_id)
 			->delete('tbl_category');
 		redirect('/manage-category','refresh');
+	}
+	public function delete_post($post_id)
+	{
+		$this->db->where('post_id',$post_id)
+			->delete('tbl_post');
+		redirect('/manage-post','refresh');
 	}
 
 

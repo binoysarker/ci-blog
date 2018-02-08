@@ -60,11 +60,17 @@ $route['dashboard'] = 'Super_Admin_Controller/index';
 $route['logout'] = 'Super_Admin_Controller/logout';
 $route['add-category'] = 'Super_Admin_Controller/add_category';
 $route['edit-category/(.+)'] = 'Super_Admin_Controller/edit_category/$1';
+$route['edit-post/(.+)'] = 'Super_Admin_Controller/edit_post/$1';
 $route['update-category'] = 'Super_Admin_Controller/update_category';
+$route['update-post'] = 'Super_Admin_Controller/update_post';
 $route['delete-category/(.+)'] = 'Super_Admin_Controller/delete_category/$1';
+$route['delete-post/(.+)'] = 'Super_Admin_Controller/delete_post/$1';
 $route['manage-category'] = 'Super_Admin_Controller/manage_category';
+$route['manage-post'] = 'Super_Admin_Controller/manage_post';
 $route['publish-status/(.+)'] = 'Super_Admin_Controller/publish_status/$1';
+$route['publish-post-status/(.+)'] = 'Super_Admin_Controller/publish_post_status/$1';
 $route['unpublish-status/(.+)'] = 'Super_Admin_Controller/unpublish_status/$1';
+$route['unpublish-post-status/(.+)'] = 'Super_Admin_Controller/unpublish_post_status/$1';
 $route['add-post'] = 'Super_Admin_Controller/add_post';
 
 $route['save-category'] = 'Super_Admin_Controller/save_category';

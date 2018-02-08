@@ -24,6 +24,19 @@ class Super_Admin_Model extends CI_Model
 		->set('publication_status',$publication_status)
 		->update('tbl_category');
 	}
+	public function update_post_info()
+	{
+		$post_id = $this->input->post('post_id');
+		$post_title = $this->input->post('post_title');
+		$post_description = $this->input->post('post_description');
+		$publication_status = $this->input->post('publication_status');
+		// replce the row of that table with the data 
+		$this->db->where('post_id',$post_id)
+		->set('post_title',$post_title)
+		->set('post_description',$post_description)
+		->set('publication_status',$publication_status)
+		->update('tbl_post');
+	}
 	public function save_post_info()
 	{
 		$data['category_id'] = $this->input->post('category_id');
@@ -39,9 +52,22 @@ class Super_Admin_Model extends CI_Model
 		$result = $query->result();
 		return $result;
 	}
+	public function get_all_post()
+	{
+		$query = $this->db->get('tbl_post');
+		$result = $query->result();
+		return $result;
+	}
 	public function select_all_published_category()
 	{
 		$query = $this->db->where('publication_status',1)->get('tbl_category');
+		$result = $query->result();
+		return $result;
+	}
+	// now time to display all the published posts in the user home page
+	public function select_all_published_post()
+	{
+		$query = $this->db->where('publication_status',1)->get('tbl_post');
 		$result = $query->result();
 		return $result;
 	}
@@ -57,16 +83,34 @@ class Super_Admin_Model extends CI_Model
 			->where('category_id',$category_id)
 			->update('tbl_category');
 	}
+	public function publish_post_status_info($post_id)
+	{
+		$query =  $this->db->set('publication_status',1)
+			->where('post_id',$post_id)
+			->update('tbl_post');
+	}
 	public function unpublish_status_info($category_id)
 	{
 		$query =  $this->db->set('publication_status',0)
 			->where('category_id',$category_id)
 			->update('tbl_category');
 	}
+	public function unpublish_post_status_info($post_id)
+	{
+		$query =  $this->db->set('publication_status',0)
+			->where('post_id',$post_id)
+			->update('tbl_post');
+	}
 	public function get_specific_category($category_id)
 	{
 		$query = $this->db->where('category_id',$category_id)
 			->get('tbl_category');
+		return $query->result();
+	}
+	public function get_specific_post($post_id)
+	{
+		$query = $this->db->where('post_id',$post_id)
+			->get('tbl_post');
 		return $query->result();
 	}
 
