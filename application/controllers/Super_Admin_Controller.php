@@ -53,7 +53,8 @@ class Super_Admin_Controller extends CI_Controller
 	}
 	public function add_post()
 	{
-		$data['admin_content'] = $this->load->view('admin/pages/admin_add_post','',true);
+		$result['published_category'] = $this->Super_Admin_Model->select_all_published_category();
+		$data['admin_content'] = $this->load->view('admin/pages/admin_add_post',$result,true);
 		$this->load->view('admin/admin_master',$data);
 	}
 	public function edit_category($category_id)
@@ -64,6 +65,7 @@ class Super_Admin_Controller extends CI_Controller
 	}
 	public function edit_post($post_id)
 	{
+		$result['published_category'] = $this->Super_Admin_Model->select_all_published_category();
 		$result['post'] = $this->Super_Admin_Model->get_specific_post($post_id);
 		$data['admin_content'] = $this->load->view('admin/pages/admin_edit_post',$result,true);
 		$this->load->view('admin/admin_master',$data);

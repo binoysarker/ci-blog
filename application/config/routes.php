@@ -54,6 +54,8 @@ $route['default_controller'] = 'Home_Controller';
 $route['about'] = 'Home_Controller/about';
 $route['contact'] = 'Home_Controller/contact';
 $route['posts'] = 'Home_Controller/posts';
+$route['show-post/(.+)'] = 'Home_Controller/show_post/$1';
+$route['get-post-by-category/(.+)'] = 'Home_Controller/get_post_by_category/$1';
 
 // super admin sectioin
 $route['dashboard'] = 'Super_Admin_Controller/index';

@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <a class="nav-link" href="<?= base_url('/about') ?>">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?= base_url('/posts') ?>">Post</a>
+              <a class="nav-link" href="<?= base_url('/posts') ?>">All Posts</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?= base_url('/contact') ?>">Contact</a>

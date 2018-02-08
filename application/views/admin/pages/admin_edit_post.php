@@ -6,6 +6,9 @@
 
       <?= form_open('update-post'); ?>
         <!-- display error message -->
+        <?php foreach ($post as $key => $value): ?>
+          
+        <?php endforeach ?>
         <?php if ($message = $this->session->userdata('error_message')): ?>
           <div class="form-group">
               <div class="alert alert-danger" role="alert">
@@ -21,6 +24,7 @@
         <?php if ($post): ?>
           <?php foreach ($post as $key => $value): ?>
             <input type="hidden" name="post_id" value="<?= $value->post_id ?>">
+
             <div class="form-group">
               <label for="post_title">Post Title</label>
               <input class="form-control" id="post_title" name="post_title" type="text"  placeholder="Post Title" value="<?= $value->post_title ?>">
@@ -29,6 +33,17 @@
               <label for="editor">Post Description</label>
               <textarea name="post_description" id="editor" class="form-control"  name="post_description" placeholder="Post description"><?= $value->post_description ?></textarea>
             </div>
+            <div class="form-group">
+                <label for="category_id">Category Name</label>
+                <select class="form-control" name="category_id" id="category_id">
+                  <?php if ($published_category): ?>
+                    <?php foreach ($published_category as $key => $value): ?>
+                      <option value="<?= $value->category_id ?>"><?= $value->category_name ?></option>
+                    <?php endforeach ?>
+                  <?php endif ?>
+                </select>
+            </div>
+            
             <div class="form-group">
                 <label for="publication_status">Publication Status(current status: <?= $value->publication_status == 1 ? 'published' : 'unpublished' ?>)</label>
                 <select class="form-control" name="publication_status" id="publication_status">

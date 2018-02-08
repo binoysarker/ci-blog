@@ -27,11 +27,13 @@ class Super_Admin_Model extends CI_Model
 	public function update_post_info()
 	{
 		$post_id = $this->input->post('post_id');
+		$category_id = $this->input->post('category_id');
 		$post_title = $this->input->post('post_title');
 		$post_description = $this->input->post('post_description');
 		$publication_status = $this->input->post('publication_status');
 		// replce the row of that table with the data 
 		$this->db->where('post_id',$post_id)
+		->set('category_id',$category_id)
 		->set('post_title',$post_title)
 		->set('post_description',$post_description)
 		->set('publication_status',$publication_status)
@@ -58,6 +60,7 @@ class Super_Admin_Model extends CI_Model
 		$result = $query->result();
 		return $result;
 	}
+	
 	public function select_all_published_category()
 	{
 		$query = $this->db->where('publication_status',1)->get('tbl_category');

@@ -21,8 +21,8 @@
         <div class="form-group">
             <label for="category_id">Category Name</label>
             <select class="form-control" name="category_id" id="category_id">
-              <?php if ($result = $this->Super_Admin_Model->select_all_published_category()): ?>
-                <?php foreach ($result as $key => $value): ?>
+              <?php if ($published_category): ?>
+                <?php foreach ($published_category as $key => $value): ?>
                   <option value="<?= $value->category_id ?>"><?= $value->category_name ?></option>
                 <?php endforeach ?>
               <?php endif ?>

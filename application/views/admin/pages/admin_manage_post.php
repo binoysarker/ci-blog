@@ -1,7 +1,7 @@
 <!-- confirmation for delete using javascript -->
 <script type="text/javascript">
   function checkDelete() {
-    var check = confirm('do you want to delete?');
+    var check = confirm('do you want to delete.It will be permanently delted ?');
     if (check) {
       return true;
     }
