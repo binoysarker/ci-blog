@@ -5,6 +5,12 @@
       
 
       <?= form_open('save-post'); ?>
+        <!-- if there is any for validarion error then show this -->
+        <?php if (validation_errors()): ?>
+          <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong><?= validation_errors(); ?>
+          </div>
+        <?php endif ?>
         <!-- display error message -->
         <?php if ($message = $this->session->userdata('error_message')): ?>
           <div class="form-group">
@@ -30,15 +36,15 @@
         </div>
         <div class="form-group">
           <label for="post_title">Post Title</label>
-          <input class="form-control" id="post_title" name="post_title" type="text" aria-describedby="emailHelp" placeholder="Post Title">
+          <input required class="form-control" id="post_title" name="post_title" type="text" aria-describedby="emailHelp" placeholder="Post Title">
         </div>
         <div class="form-group">
           <label for="editor">Post Description</label>
-          <textarea name="post_description" id="editor" class="form-control" aria-describedby="catdes" placeholder="Post Description"></textarea>
+          <textarea required name="post_description" id="editor" class="form-control" aria-describedby="catdes" placeholder="Post Description"></textarea>
         </div>
         <div class="form-group">
             <label for="publication_status">Publication Status</label>
-            <select class="form-control" name="publication_status" id="publication_status">
+            <select required class="form-control" name="publication_status" id="publication_status">
               <option value="1">published</option>
               <option value="0">unpublished</option>
             </select>

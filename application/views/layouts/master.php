@@ -22,6 +22,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Custom styles for this template -->
     <?= link_tag('front_end/css/clean-blog.min.css') ?>
+    <?= link_tag('front_end/css/myCustomcss.css') ?>
+    <!-- vue js  -->
+    <script type="text/javascript" src="<?= base_url('front_end/js/Vue.js') ?>"></script>    
+    <!-- axios js -->
+    <script type="text/javascript" src="<?= base_url('front_end/js/axios.min.js') ?>"></script>
 
   </head>
 
@@ -104,6 +109,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Custom scripts for this template -->
     <script src="<?= base_url('front_end/js/clean-blog.min.js') ?>"></script>
+
 
   </body>
 

@@ -48,5 +48,9 @@ class Home_Controller extends CI_Controller
 		$data['main_content'] = $this->load->view('pages/home_content',$result,true);
 		$this->load->view('layouts/master',$data);
 	}
+	public function add_comment()
+	{
+		echo "get comment";
+	}
 }
  ?>

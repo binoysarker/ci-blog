@@ -74,31 +74,52 @@ class Super_Admin_Controller extends CI_Controller
 	// save data
 	public function save_category()
 	{
-		$result = $this->Super_Admin_Model->save_category_info();
-		if ($result) {
-			$sdata['success_message'] = 'Category is addedd successfully';
-			$this->session->set_userdata($sdata);
-			redirect('add-category','refresh');
+		// validation of form and then do other things
+		$this->form_validation->set_rules('category_name', 'Category Name', 'required|max_length[55]');
+		$this->form_validation->set_rules('category_description', 'Category Description', 'required');
+		$this->form_validation->set_rules('publication_status', 'Publication Status', 'required|integer');
+		if ($this->form_validation->run() == FALSE) {
+			$data['admin_content'] = $this->load->view('admin/pages/admin_add_category','',true);
+			$this->load->view('admin/admin_master',$data);
+		} else {
+			$result = $this->Super_Admin_Model->save_category_info();
+			if ($result) {
+				$sdata['success_message'] = 'Category is addedd successfully';
+				$this->session->set_userdata($sdata);
+				redirect('add-category','refresh');
+			}
+			else{
+				$sdata['error_message'] = 'Category is not addedd';
+				$this->session->set_userdata($sdata);
+				redirect('add-category','refresh');
+			}
 		}
-		else{
-			$sdata['error_message'] = 'Category is not addedd';
-			$this->session->set_userdata($sdata);
-			redirect('add-category','refresh');
-		}
+		
 	}
 	public function save_post()
 	{
-		$result = $this->Super_Admin_Model->save_post_info();
-		if ($result) {
-			$sdata['success_message'] = 'Post is addedd successfully';
-			$this->session->set_userdata($sdata);
-			redirect('add-post','refresh');
+		// validation of form and then do other things
+		$this->form_validation->set_rules('post_title', 'Post Title', 'required|max_length[100]');
+		$this->form_validation->set_rules('post_description', 'Post Description', 'required');
+		$this->form_validation->set_rules('publication_status', 'Publication Status', 'required|integer');
+		if ($this->form_validation->run() == FALSE) {
+			$result['published_category'] = $this->Super_Admin_Model->select_all_published_category();
+			$data['admin_content'] = $this->load->view('admin/pages/admin_add_post',$result,true);
+			$this->load->view('admin/admin_master',$data);
+		} else {
+			$result = $this->Super_Admin_Model->save_post_info();
+			if ($result) {
+				$sdata['success_message'] = 'Post is addedd successfully';
+				$this->session->set_userdata($sdata);
+				redirect('add-post','refresh');
+			}
+			else{
+				$sdata['error_message'] = 'Post is not addedd';
+				$this->session->set_userdata($sdata);
+				redirect('add-post','refresh');
+			}
 		}
-		else{
-			$sdata['error_message'] = 'Post is not addedd';
-			$this->session->set_userdata($sdata);
-			redirect('add-post','refresh');
-		}
+		
 	}
 
 	// update data

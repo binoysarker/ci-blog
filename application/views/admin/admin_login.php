@@ -21,7 +21,13 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-        <!-- display error message -->
+        <!-- if there is any for validarion error then show this -->
+        <?php if (validation_errors()): ?>
+          <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong><?= validation_errors(); ?>
+          </div>
+        <?php endif ?>
+        <!-- display session error message -->
         <?php if ($message = $this->session->userdata('message')): ?>
           <div class="alert alert-danger" role="alert">
             <strong>Oh snap!</strong><?= $message; $this->session->unset_userdata('message') ?>
@@ -32,20 +38,21 @@
             <strong>Well done!</strong> <?= $message; $this->session->unset_userdata('success_message') ?>
           </div>
         <?php endif ?>
+        
 
         <?= form_open('/login-check'); ?>
           <div class="form-group">
             <label for="email_address">Email address</label>
-            <input class="form-control" id="email_address" name="email_address" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <input class="form-control" id="email_address" name="email_address" type="email" aria-describedby="emailHelp" placeholder="Enter email" required>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" id="exampleInputPassword1" name="password" type="password" placeholder="Password">
+            <input class="form-control" id="exampleInputPassword1" name="password" type="password" placeholder="Password" required>
           </div>
           <div class="form-group">
             <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" type="checkbox"> Remember Password</label>
+                <input class="form-check-input"  type="checkbox"> Remember Password</label>
             </div>
           </div>
           <?= form_submit(['class'=>'btn btn-primary btn-block','type'=>'submit','value'=>'Login']); ?>
