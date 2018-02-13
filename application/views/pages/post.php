@@ -41,44 +41,74 @@
             
           </div>
         </div>
-        <!-- comment section using vue js -->
-        <div id="app">
+        <!-- comment section  -->
+        <div >
           <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <!-- show comment section -->
-                <div class="alert alert-success col-12 " role="alert">
-                  Comment: {{comment}}
-                </div>
-                <!-- show reply section -->
-                <div class="alert alert-info col-10 offset-2" role="alert">
-                  Reply: {{reply}}
-                </div>
-                <!-- comment form sectioin -->
-                <form action="<?= base_url('/add-comment') ?>" method="get" accept-charset="utf-8">
-                  <fieldset class="form-group">
-                    <label for="comment">Comment</label>
-                    <input type="text" v-model='comment' class="form-control" id="comment" placeholder="Enter your Comment">
-                  </fieldset>
-                  <?php $url = base_url() ?>
-                  <fieldset>
-                    <input type="submit" class="btn btn-success float-right" @click.prevent="getComment()" name="comment" value="Comment">
-                  </fieldset>
-                </form>
-                  <!-- show reply button -->
-                  <button type="button" class="btn btn-info float-right" v-show='showbtn' @click='showForm()'>Reply</button>
-                <!-- reply section -->
-                <transition name='slide-fade'>
-                  <form action="<?= base_url('/add-reply') ?>" v-if='show' method="post" accept-charset="utf-8">
-                    <fieldset class="form-group">
-                      <label for="replay">Reply</label>
-                      <input type="text" class="form-control" v-model='reply' id="replay" placeholder="Enter your reply">
-                    </fieldset>
-                    <fieldset class="form-group">
-                      <input type="submit" class="btn btn-primary float-right" name="reply" @click.prevent='getReply()' value="Reply">
-                    </fieldset>
-                  </form>
-                </transition>  
+                <?php if ($comments): ?>
+                  <?php foreach ($comments as $key => $value): ?>
+                    <div class="alert alert-success col-12" id='showComment' role="alert">
+                      Comment: <?= $value->comment_body ?> 
+                      <?php $comment_id = $value->comment_id ?>
+                    </div>
+                    <!-- show all reply for specific comment -->
+                    <?php if ($get_reply_by_comment = $this->Super_Admin_Model->get_reply_by_comment($comment_id)): ?>
+                      <?php foreach ($get_reply_by_comment as $key => $value): ?>
+                        <div class="alert alert-info col-10 offset-2" id="showReply" role="alert">
+                          Reply: <?= $value->reply_body ?>
+                        </div>
+                      <?php endforeach ?>
+                    <?php endif ?>
+                    <!-- reply form  section -->
+                      <?= form_open('/add-reply',['id'=>'form-reply','method'=>'post']); ?>
+                        <?php if ($get_specific_post): ?>
+                          <?php foreach ($get_specific_post as $key => $value): ?>
+                            <input type="hidden" name="post_id" value="<?= $value->post_id ?>">
+                          <?php endforeach ?>
+                        <?php endif ?>
+                        <?php if ($category): ?>
+                          <?php foreach ($category as $key => $value): ?>
+                            <input type="hidden" name="category_id" value="<?= $value->category_id ?>">
+                          <?php endforeach ?>
+                        <?php endif ?>
+                        <!-- comment id input field -->
+                          <input type="hidden" name="comment_id" value="<?= $comment_id ?>">
+                        <div class="form-group">
+                          <label style="display: none;" for="reply_body">Reply</label>
+                          <input type="text" class="form-control" name="reply_body" id="reply_body" placeholder="Enter your reply">
+                        </div>
+                        <div class="form-group">
+                          <input type="submit" style="display: none;" class="btn btn-primary float-right" name="submit"  value="Reply">
+                        </div>
+                      <?= form_close(); ?>
+                  <?php endforeach ?>
+
+                <?php endif ?>
+
                 
+
+                <!-- comment form sectioin -->
+                <?= form_open('/add-comment',['id'=>'form-comment','method'=>'post']); ?>
+                  <?php if ($get_specific_post): ?>
+                    <?php foreach ($get_specific_post as $key => $value): ?>
+                      <input type="hidden" name="post_id" value="<?= $value->post_id ?>">
+                    <?php endforeach ?>
+                  <?php endif ?>
+                  <?php if ($category): ?>
+                    <?php foreach ($category as $key => $value): ?>
+                      <input type="hidden" name="category_id" value="<?= $value->category_id ?>">
+                    <?php endforeach ?>
+                  <?php endif ?>
+                  <div class="form-group">
+                    <label for="comment_body">Comment</label>
+                    <input type="text" name="comment_body" class="form-control" id="comment_body" placeholder="Enter your Comment">
+                  </div>
+                  <div>
+                    <input type="submit" class="btn btn-success float-right"  name="submit" value="Comment">
+                  </div>
+                <?= form_close(); ?>
+                  
             </div>
           </div>
         </div>

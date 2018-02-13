@@ -117,5 +117,45 @@ class Super_Admin_Model extends CI_Model
 		return $query->result();
 	}
 
+	// comment and reply section
+	public function save_comment_info($post_id,$comment_body)
+	{
+		$data= [
+			'post_id'=>$post_id,
+			'comment_body'=>$comment_body,
+			'publication_status'=>0
+		];
+		$this->db->insert('tbl_comments',$data);
+	}
+	public function save_reply_info($post_id,$reply_body,$comment_id)
+	{
+		$data= [
+			'post_id'=>$post_id,
+			'comment_id'=>$comment_id,
+			'reply_body'=>$reply_body,
+			'publication_status'=>0
+		];
+		$this->db->insert('tbl_reply',$data);
+	}
+	public function get_comment_by_post($post_id)
+	{
+		$query = $this->db->where('post_id',$post_id)->order_by('comment_body','DESC')->get('tbl_comments');
+		$result = $query->result();
+		return $result;
+	}
+	public function get_reply_by_post($post_id)
+	{
+		$query = $this->db->where('post_id',$post_id)->order_by('reply_body','DESC')->get('tbl_reply');
+		$result = $query->result();
+		return $result;
+	}
+	// query from view to model
+	public function get_reply_by_comment($comment_id)
+	{
+		$query = $this->db->where('comment_id',$comment_id)->get('tbl_reply');
+		$result = $query->result();
+		return $result;
+	}
+
 
 }
