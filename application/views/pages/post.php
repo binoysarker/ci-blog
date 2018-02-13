@@ -18,7 +18,6 @@
 
     <!-- Post Content -->
     <article>
-      
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
@@ -26,6 +25,14 @@
             <?php if ($get_specific_post): ?>
               <?php foreach ($get_specific_post as $key => $value): ?>
                 <h2 class="section-heading"><?= $value->post_title ?></h2>
+                
+                <?php 
+                $data = $value->post_image;    
+                $image_path = substr($data, strpos($data, "/admin_asset") + 1);    
+                echo $image_path;
+                 ?>
+
+                <img src="<?= base_url(''.$image_path) ?>" class="img-thumbnail" alt="">
                 <p><?= $value->post_description ?></p>
                 <?php foreach ($category as $key => $value): ?>
                   <p>Category:

@@ -16,6 +16,28 @@
   <?= link_tag('admin_asset/vendor/font-awesome/css/font-awesome.min.css') ?>
   <!-- Custom styles for this template-->
   <?= link_tag('admin_asset/css/sb-admin.css') ?>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="<?= base_url('admin_asset/vendor/jquery/jquery.min.js') ?>"></script>
+  <script src="<?= base_url('admin_asset/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="<?= base_url('admin_asset/vendor/jquery-easing/jquery.easing.min.js') ?>"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="<?= base_url('admin_asset/vendor/chart.js/Chart.min.js') ?>"></script>
+  <script src="<?= base_url('admin_asset/vendor/datatables/jquery.dataTables.js') ?>"></script>
+  <script src="<?= base_url('admin_asset/vendor/datatables/dataTables.bootstrap4.js') ?>"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="<?= base_url('admin_asset/js/sb-admin.min.js')  ?>"></script>
+  <!-- Custom scripts for this page-->
+  <script src="<?= base_url('admin_asset/js/sb-admin-datatables.min.js') ?>"></script>
+  <script src="<?= base_url('admin_asset/js/sb-admin-charts.min.js') ?>"></script>
+  <script type="text/javascript" src="<?= base_url('admin_asset/ckeditor/ckeditor.js') ?>"></script>
+  <script type="text/javascript">
+    document.addEventListener( 'DOMContentLoaded',function()
+    {
+     CKEDITOR.replace( 'editor' ); 
+    });
+  </script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -126,27 +148,7 @@
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?= base_url('admin_asset/vendor/jquery/jquery.min.js') ?>"></script>
-    <script src="<?= base_url('admin_asset/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="<?= base_url('admin_asset/vendor/jquery-easing/jquery.easing.min.js') ?>"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="<?= base_url('admin_asset/vendor/chart.js/Chart.min.js') ?>"></script>
-    <script src="<?= base_url('admin_asset/vendor/datatables/jquery.dataTables.js') ?>"></script>
-    <script src="<?= base_url('admin_asset/vendor/datatables/dataTables.bootstrap4.js') ?>"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="<?= base_url('admin_asset/js/sb-admin.min.js')  ?>"></script>
-    <!-- Custom scripts for this page-->
-    <script src="<?= base_url('admin_asset/js/sb-admin-datatables.min.js') ?>"></script>
-    <script src="<?= base_url('admin_asset/js/sb-admin-charts.min.js') ?>"></script>
-    <script type="text/javascript" src="<?= base_url('admin_asset/ckeditor/ckeditor.js') ?>"></script>
-    <script type="text/javascript">
-      document.addEventListener( 'DOMContentLoaded',function()
-      {
-       CKEDITOR.replace( 'editor' ); 
-      });
-    </script>
+    
   </div>
 </body>
 

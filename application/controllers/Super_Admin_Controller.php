@@ -103,21 +103,48 @@ class Super_Admin_Controller extends CI_Controller
 		$this->form_validation->set_rules('post_description', 'Post Description', 'required');
 		$this->form_validation->set_rules('publication_status', 'Publication Status', 'required|integer');
 		if ($this->form_validation->run() == FALSE) {
-			$result['published_category'] = $this->Super_Admin_Model->select_all_published_category();
-			$data['admin_content'] = $this->load->view('admin/pages/admin_add_post',$result,true);
-			$this->load->view('admin/admin_master',$data);
+			$this->add_post();
 		} else {
-			$result = $this->Super_Admin_Model->save_post_info();
-			if ($result) {
-				$sdata['success_message'] = 'Post is addedd successfully';
-				$this->session->set_userdata($sdata);
-				redirect('add-post','refresh');
-			}
-			else{
-				$sdata['error_message'] = 'Post is not addedd';
-				$this->session->set_userdata($sdata);
-				redirect('add-post','refresh');
-			}
+			// file upload section
+			$config['upload_path']          = 'admin_asset/images/';
+      $config['allowed_types']        = 'gif|jpg|png';
+      $config['max_size']             = 1000;
+      $config['max_width']            = 1024;
+      $config['max_height']           = 768;
+
+      $this->load->library('upload', $config);
+      /*echo "<pre>";
+      print_r($config);
+      exit();*/
+
+      if ( ! $this->upload->do_upload('post_image'))
+      {
+        $result['error'] = $this->upload->display_errors();
+        $result['published_category'] = $this->Super_Admin_Model->select_all_published_category();
+    		$data['admin_content'] = $this->load->view('admin/pages/admin_add_post',$result,true);
+    		$this->load->view('admin/admin_master',$data);
+      }
+      else
+      {
+        $result['upload_data'] = $this->upload->data();
+        $result['published_category'] = $this->Super_Admin_Model->select_all_published_category();
+    		$data['admin_content'] = $this->load->view('admin/pages/admin_add_post',$result,true);
+    		$this->load->view('admin/admin_master',$data);
+    		$image_path = $result['upload_data']['full_path'];
+        
+        // inserting data in the database
+        $result = $this->Super_Admin_Model->save_post_info($image_path);
+        if ($result) {
+        	$sdata['success_message'] = 'Post is addedd successfully';
+        	$this->session->set_userdata($sdata);
+        	redirect('add-post','refresh');
+        }
+        else{
+        	$sdata['error_message'] = 'Post is not addedd';
+        	$this->session->set_userdata($sdata);
+        	redirect('add-post','refresh');
+        }
+      }
 		}
 		
 	}

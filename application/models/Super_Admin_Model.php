@@ -39,10 +39,12 @@ class Super_Admin_Model extends CI_Model
 		->set('publication_status',$publication_status)
 		->update('tbl_post');
 	}
-	public function save_post_info()
+	public function save_post_info($image_path)
 	{
-		$data['category_id'] = $this->input->post('category_id');
+		
+		$data['post_image'] = $image_path;
 		$data['post_title'] = $this->input->post('post_title');
+		$data['category_id'] = $this->input->post('category_id');
 		$data['post_description'] = $this->input->post('post_description');
 		$data['publication_status'] = $this->input->post('publication_status');
 		return $this->db->insert('tbl_post',$data);

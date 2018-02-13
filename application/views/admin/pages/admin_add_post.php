@@ -3,12 +3,16 @@
     <div class="card-header"><strong>Add Post</strong></div>
     <div class="card-body">
       
-
-      <?= form_open('save-post'); ?>
+      <?= form_open_multipart('save-post'); ?>
         <!-- if there is any for validarion error then show this -->
         <?php if (validation_errors()): ?>
           <div class="alert alert-danger" role="alert">
             <strong>Oh snap!</strong><?= validation_errors(); ?>
+          </div>
+        <?php endif ?>
+        <?php if (isset($error)): ?>
+          <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong><?= $error; ?>
           </div>
         <?php endif ?>
         <!-- display error message -->
@@ -38,6 +42,11 @@
           <label for="post_title">Post Title</label>
           <input required class="form-control" id="post_title" name="post_title" type="text" aria-describedby="emailHelp" placeholder="Post Title">
         </div>
+        <div class="form-group">
+          <label for="post_image">Post Image</label>
+          <input  class="form-control" id="post_image" name="post_image" type="file" aria-describedby="emailHelp" placeholder="Post Image" >
+        </div>
+        
         <div class="form-group">
           <label for="editor">Post Description</label>
           <textarea required name="post_description" id="editor" class="form-control" aria-describedby="catdes" placeholder="Post Description"></textarea>
